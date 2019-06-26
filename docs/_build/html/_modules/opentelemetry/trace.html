@@ -1,0 +1,421 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.trace &mdash; OpenTelemetry  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> OpenTelemetry
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../opentelemetry.trace.html">opentelemetry.trace package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">OpenTelemetry</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>opentelemetry.trace</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for opentelemetry.trace</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019, OpenTelemetry Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The OpenTelemetry tracing API describes the classes used to generate</span>
+<span class="sd">distributed traces.</span>
+
+<span class="sd">The :class:`.Tracer` class controls access to the execution context, and</span>
+<span class="sd">manages span creation. Each operation in a trace is represented by a</span>
+<span class="sd">:class:`.Span`, which records the start, end time, and metadata associated with</span>
+<span class="sd">the operation.</span>
+
+<span class="sd">This module provides abstract (i.e. unimplemented) classes required for</span>
+<span class="sd">tracing, and a concrete no-op ``BlankSpan`` that allows applications to use the</span>
+<span class="sd">API package alone without a supporting implementation.</span>
+
+<span class="sd">The tracer supports creating spans that are &quot;attached&quot; or &quot;detached&quot; from the</span>
+<span class="sd">context. By default, new spans are &quot;attached&quot; to the context in that they are</span>
+<span class="sd">created as children of the currently active span, and the newly-created span</span>
+<span class="sd">becomes the new active span::</span>
+
+<span class="sd">    # TODO (#15): which module holds the global tracer?</span>
+<span class="sd">    from opentelemetry.api.trace import tracer</span>
+
+<span class="sd">    # Create a new root span, set it as the current span in context</span>
+<span class="sd">    with tracer.start_span(&quot;parent&quot;):</span>
+<span class="sd">        # Attach a new child and update the current span</span>
+<span class="sd">        with tracer.start_span(&quot;child&quot;):</span>
+<span class="sd">            do_work():</span>
+<span class="sd">        # Close child span, set parent as current</span>
+<span class="sd">    # Close parent span, set default span as current</span>
+
+<span class="sd">When creating a span that&#39;s &quot;detached&quot; from the context the active span doesn&#39;t</span>
+<span class="sd">change, and the caller is responsible for managing the span&#39;s lifetime::</span>
+
+<span class="sd">    from opentelemetry.api.trace import tracer</span>
+
+<span class="sd">    # Explicit parent span assignment</span>
+<span class="sd">    span = tracer.create_span(&quot;child&quot;, parent=parent) as child:</span>
+
+<span class="sd">    # The caller is responsible for starting and ending the span</span>
+<span class="sd">    span.start()</span>
+<span class="sd">    try:</span>
+<span class="sd">        do_work(span=child)</span>
+<span class="sd">    finally:</span>
+<span class="sd">        span.end()</span>
+
+<span class="sd">Applications should generally use a single global tracer, and use either</span>
+<span class="sd">implicit or explicit context propagation consistently throughout.</span>
+
+<span class="sd">.. versionadded:: 0.1.0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Iterator</span>
+
+
+<div class="viewcode-block" id="Tracer"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Tracer">[docs]</a><span class="k">class</span> <span class="nc">Tracer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Handles span creation and in-process context propagation.</span>
+
+<span class="sd">    This class provides methods for manipulating the context, creating spans,</span>
+<span class="sd">    and controlling spans&#39; lifecycles.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Tracer.get_current_span"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Tracer.get_current_span">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_span</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Span&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Gets the currently active span from the context.</span>
+
+<span class="sd">        If there is no current span, return a placeholder span with an invalid</span>
+<span class="sd">        context.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The currently active :class:`.Span`, or a placeholder span with an</span>
+<span class="sd">            invalid :class:`.SpanContext`.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Tracer.start_span"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Tracer.start_span">[docs]</a>    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">start_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="s1">&#39;Span&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="s1">&#39;Span&#39;</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Context manager for span creation.</span>
+
+<span class="sd">        Create a new child of the current span, or create a root span if no</span>
+<span class="sd">        current span exists. Start the span and set it as the current span in</span>
+<span class="sd">        this tracer&#39;s context.</span>
+
+<span class="sd">        On exiting the context manager stop the span and set its parent as the</span>
+<span class="sd">        current span.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            with tracer.start_span(&quot;one&quot;) as parent:</span>
+<span class="sd">                parent.add_event(&quot;parent&#39;s event&quot;)</span>
+<span class="sd">                with tracer.start_span(&quot;two&quot;) as child:</span>
+<span class="sd">                    child.add_event(&quot;child&#39;s event&quot;)</span>
+<span class="sd">                    tracer.get_current_span()  # returns child</span>
+<span class="sd">                tracer.get_current_span()      # returns parent</span>
+<span class="sd">            tracer.get_current_span()          # returns the previously active span</span>
+
+<span class="sd">        This is a convenience method for creating spans attached to the</span>
+<span class="sd">        tracer&#39;s context. Applications that need more control over the span</span>
+<span class="sd">        lifetime should use :meth:`create_span` instead. For example::</span>
+
+<span class="sd">            with tracer.start_span(name) as span:</span>
+<span class="sd">                do_work()</span>
+
+<span class="sd">        is equivalent to::</span>
+
+<span class="sd">            span = tracer.create_span(name, parent=tracer.get_current_span())</span>
+<span class="sd">            with tracer.use_span(span):</span>
+<span class="sd">                do_work()</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the span to be created.</span>
+<span class="sd">            parent: The span&#39;s parent.</span>
+
+<span class="sd">        Yields:</span>
+<span class="sd">            The newly-created span.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Tracer.create_span"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Tracer.create_span">[docs]</a>    <span class="k">def</span> <span class="nf">create_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="s1">&#39;Span&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Span&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Creates a new child span of the given parent.</span>
+
+<span class="sd">        Creating the span does not start it, and should not affect the tracer&#39;s</span>
+<span class="sd">        context. To start the span and update the tracer&#39;s context to make it</span>
+<span class="sd">        the currently active span, see :meth:`use_span`.</span>
+
+<span class="sd">        Applications that need to explicitly set spans&#39; parents or create spans</span>
+<span class="sd">        detached from the tracer&#39;s context should use this method.</span>
+
+<span class="sd">            with tracer.start_span(name) as span:</span>
+<span class="sd">                do_work()</span>
+
+<span class="sd">        This is equivalent to::</span>
+
+<span class="sd">            span = tracer.create_span(name, parent=tracer.get_current_span())</span>
+<span class="sd">            with tracer.use_span(span):</span>
+<span class="sd">                do_work()</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: The name of the span to be created.</span>
+<span class="sd">            parent: The span&#39;s parent.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The newly-created span.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Tracer.use_span"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Tracer.use_span">[docs]</a>    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">use_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">span</span><span class="p">:</span> <span class="s1">&#39;Span&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Context manager for controlling a span&#39;s lifetime.</span>
+
+<span class="sd">        Start the given span and set it as the current span in this tracer&#39;s</span>
+<span class="sd">        context.</span>
+
+<span class="sd">        On exiting the context manager stop the span and set its parent as the</span>
+<span class="sd">        current span.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            span: The span to start and make current.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+
+
+<div class="viewcode-block" id="Span"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Span">[docs]</a><span class="k">class</span> <span class="nc">Span</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A span represents a single operation within a trace.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Span.start"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Span.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sets the current time as the span&#39;s start time.</span>
+
+<span class="sd">        Each span represents a single operation. The span&#39;s start time is the</span>
+<span class="sd">        wall time at which the operation started.</span>
+
+<span class="sd">        Only the first call to ``start`` should modify the span, and</span>
+<span class="sd">        implementations are free to ignore or raise on further calls.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Span.end"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Span.end">[docs]</a>    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sets the current time as the span&#39;s end time.</span>
+
+<span class="sd">        The span&#39;s end time is the wall time at which the operation finished.</span>
+
+<span class="sd">        Only the first call to ``end`` should modify the span, and</span>
+<span class="sd">        implementations are free to ignore or raise on further calls.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Span.get_context"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.Span.get_context">[docs]</a>    <span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SpanContext&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Gets the span&#39;s SpanContext.</span>
+
+<span class="sd">        Get an immutable, serializable identifier for this span that can be</span>
+<span class="sd">        used to create new child spans.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A :class:`.SpanContext` with a copy of this span&#39;s immutable state.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+
+
+<div class="viewcode-block" id="SpanContext"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.SpanContext">[docs]</a><span class="k">class</span> <span class="nc">SpanContext</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The state of a Span to propagate between processes.</span>
+
+<span class="sd">    This class includes the immutable attributes of a :class:`.Span` that must</span>
+<span class="sd">    be propagated to a span&#39;s children and across process boundaries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        trace_id: The ID of the trace that this span belongs to.</span>
+<span class="sd">        span_id: This span&#39;s ID.</span>
+<span class="sd">        options: Trace options to propagate.</span>
+<span class="sd">        state: Tracing-system-specific info to propagate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">trace_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">span_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">options</span><span class="p">:</span> <span class="s1">&#39;TraceOptions&#39;</span><span class="p">,</span>
+                 <span class="n">state</span><span class="p">:</span> <span class="s1">&#39;TraceState&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+<span class="c1"># TODO</span>
+<div class="viewcode-block" id="TraceOptions"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.TraceOptions">[docs]</a><span class="k">class</span> <span class="nc">TraceOptions</span><span class="p">(</span><span class="nb">int</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<span class="c1"># TODO</span>
+<div class="viewcode-block" id="TraceState"><a class="viewcode-back" href="../../opentelemetry.trace.html#opentelemetry.trace.TraceState">[docs]</a><span class="k">class</span> <span class="nc">TraceState</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, OpenTelemetry Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
