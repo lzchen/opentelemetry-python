@@ -13,6 +13,8 @@
 # limitations under the License.
 
 import logging
+from datetime import datetime
+
 from typing import Tuple, Type
 
 from opentelemetry import metrics as metrics_api
@@ -20,7 +22,7 @@ from opentelemetry import metrics as metrics_api
 logger = logging.getLogger(__name__)
 
 
-class BaseHandle:
+class MetricHandle:
     def __init__(
         self,
         value_type: Type[metrics_api.ValueT],
@@ -31,6 +33,7 @@ class BaseHandle:
         self.value_type = value_type
         self.enabled = enabled
         self.monotonic = monotonic
+        self.time_stamp = datetime.utcnow()
 
     def _validate_update(self, value: metrics_api.ValueT):
         if not self.enabled:
@@ -46,31 +49,33 @@ class BaseHandle:
         return True
 
 
-class CounterHandle(metrics_api.CounterHandle, BaseHandle):
+class CounterHandle(metrics_api.CounterHandle, MetricHandle):
     def update(self, value: metrics_api.ValueT) -> None:
         if self._validate_update(value):
             self.data += value
+            self.time_stamp = datetime.utcnow()
 
     def add(self, value: metrics_api.ValueT) -> None:
         """See `opentelemetry.metrics.CounterHandle._add`."""
         self.update(value)
 
 
-class GaugeHandle(metrics_api.GaugeHandle, BaseHandle):
+class GaugeHandle(metrics_api.GaugeHandle, MetricHandle):
     def update(self, value: metrics_api.ValueT) -> None:
         if self._validate_update(value):
             self.data = value
+            self.time_stamp = datetime.utcnow()
 
     def set(self, value: metrics_api.ValueT) -> None:
         """See `opentelemetry.metrics.GaugeHandle._set`."""
         self.update(value)
 
 
-class MeasureHandle(metrics_api.MeasureHandle, BaseHandle):
+class MeasureHandle(metrics_api.MeasureHandle, MetricHandle):
     def update(self, value: metrics_api.ValueT) -> None:
         if self._validate_update(value):
-            pass
             # TODO: record
+            self.time_stamp = datetime.utcnow()
 
     def record(self, value: metrics_api.ValueT) -> None:
         """See `opentelemetry.metrics.MeasureHandle._record`."""
@@ -80,7 +85,7 @@ class MeasureHandle(metrics_api.MeasureHandle, BaseHandle):
 class Metric(metrics_api.Metric):
     """See `opentelemetry.metrics.Metric`."""
 
-    HANDLE_TYPE = BaseHandle
+    HANDLE_TYPE = MetricHandle
 
     def __init__(
         self,
@@ -101,8 +106,10 @@ class Metric(metrics_api.Metric):
         self.monotonic = monotonic
         self.handles = {}
 
-    def get_handle(self, label_values: Tuple[str, ...]) -> BaseHandle:
+    def get_handle(self, label_values: Tuple[str, ...]) -> MetricHandle:
         """See `opentelemetry.metrics.Metric.get_handle`."""
+        if len(label_values) != len(self.label_keys):
+            raise ValueError("Label values must match label keys.")
         handle = self.handles.get(label_values)
         if not handle:
             handle = self.__class__.HANDLE_TYPE(
