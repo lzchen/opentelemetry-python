@@ -38,7 +38,7 @@ class MetricsExporter:
         """Exports a batch of telemetry data.
 
         Args:
-            metric_tuples: A sequence of metric pairs. A metric pair consists 
+            metric_tuples: A sequence of metric pairs. A metric pair consists
                 of a `Metric` and a sequence of strings. The sequence of
                  strings will be used to get the corresponding `MetricHandle`
                 from the `Metric` to import.
@@ -67,5 +67,7 @@ class ConsoleMetricsExporter(MetricsExporter):
         metric_tuples: Sequence[Tuple[Metric, Sequence[str]]]
     ) -> "MetricsExportResult":
         for metric_tuple in metric_tuples:
-            print(metric_tuple)
+            handle = metric_tuple[0].get_handle(metric_tuple[1])
+            print(str(metric_tuple[0]) + ", LabelValues: " +
+                str(metric_tuple[1]) + ", " + str(handle))
         return MetricsExportResult.SUCCESS

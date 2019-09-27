@@ -32,9 +32,9 @@ counter = meter.create_metric(
     "bytes",
     int,
     Counter,
-    ("environment"),
+    ("environment",),
 )
-label_values = ("staging")
+label_values = ("staging",)
 counter_handle = counter.get_handle(label_values)
 counter_handle.add(100)
 

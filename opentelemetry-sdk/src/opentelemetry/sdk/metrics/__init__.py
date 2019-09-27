@@ -15,7 +15,7 @@
 import logging
 from datetime import datetime
 
-from typing import Tuple, Type
+from typing import Sequence, Tuple, Type
 
 from opentelemetry import metrics as metrics_api
 
@@ -47,6 +47,16 @@ class MetricHandle:
             )
             return False
         return True
+
+    def __repr__(self):
+        return '{}(data="{}", time_stamp={})'.format(
+            type(self).__name__, self.data, self.time_stamp
+        )
+
+    def __str__(self):
+        return '{}(data="{}", time_stamp={})'.format(
+            type(self).__name__, self.data, self.time_stamp
+        )
 
 
 class CounterHandle(metrics_api.CounterHandle, MetricHandle):
@@ -93,7 +103,7 @@ class Metric(metrics_api.Metric):
         description: str,
         unit: str,
         value_type: Type[metrics_api.ValueT],
-        label_keys: Tuple[str, ...] = None,
+        label_keys: Sequence[str] = None,
         enabled: bool = True,
         monotonic: bool = False,
     ):
@@ -106,7 +116,7 @@ class Metric(metrics_api.Metric):
         self.monotonic = monotonic
         self.handles = {}
 
-    def get_handle(self, label_values: Tuple[str, ...]) -> MetricHandle:
+    def get_handle(self, label_values: Sequence[str]) -> MetricHandle:
         """See `opentelemetry.metrics.Metric.get_handle`."""
         if len(label_values) != len(self.label_keys):
             raise ValueError("Label values must match label keys.")
@@ -117,6 +127,16 @@ class Metric(metrics_api.Metric):
             )
         self.handles[label_values] = handle
         return handle
+
+    def __repr__(self):
+        return '{}(name="{}", description={})'.format(
+            type(self).__name__, self.name, self.description
+        )
+
+    def __str__(self):
+        return '{}(name="{}", description={})'.format(
+            type(self).__name__, self.name, self.description
+        )
 
 
 class Counter(Metric):
@@ -135,7 +155,7 @@ class Counter(Metric):
         description: str,
         unit: str,
         value_type: Type[metrics_api.ValueT],
-        label_keys: Tuple[str, ...] = None,
+        label_keys: Sequence[str] = None,
         enabled: bool = True,
         monotonic: bool = True,
     ):
@@ -165,7 +185,7 @@ class Gauge(Metric):
         description: str,
         unit: str,
         value_type: Type[metrics_api.ValueT],
-        label_keys: Tuple[str, ...] = None,
+        label_keys: Sequence[str] = None,
         enabled: bool = True,
         monotonic: bool = False,
     ):
@@ -195,7 +215,7 @@ class Measure(Metric):
         description: str,
         unit: str,
         value_type: Type[metrics_api.ValueT],
-        label_keys: Tuple[str, ...] = None,
+        label_keys: Sequence[str] = None,
         enabled: bool = False,
         monotonic: bool = False,
     ):
@@ -215,8 +235,8 @@ class Meter(metrics_api.Meter):
 
     def record_batch(
         self,
-        label_values: Tuple[str, ...],
-        record_tuples: Tuple[Tuple[metrics_api.Metric, metrics_api.ValueT]],
+        label_values: Sequence[str],
+        record_tuples: Sequence[Tuple[metrics_api.Metric, metrics_api.ValueT]],
     ) -> None:
         """See `opentelemetry.metrics.Meter.record_batch`."""
         for metric, value in record_tuples:
@@ -229,7 +249,7 @@ class Meter(metrics_api.Meter):
         unit: str,
         value_type: Type[metrics_api.ValueT],
         metric_type: Type[metrics_api.MetricT],
-        label_keys: Tuple[str, ...] = None,
+        label_keys: Sequence[str] = None,
         enabled: bool = True,
         monotonic: bool = False,
     ) -> "Metric":

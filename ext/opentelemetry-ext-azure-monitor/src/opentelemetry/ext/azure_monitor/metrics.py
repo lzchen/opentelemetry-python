@@ -14,7 +14,6 @@
 
 import json
 import logging
-from urllib.parse import urlparse
 
 import requests
 
@@ -86,10 +85,13 @@ class AzureMonitorMetricsExporter(MetricsExporter):
         )
         envelope.name = "Microsoft.ApplicationInsights.Metric"
         # label_keys and label_values assumed to have the same length
-        properties = {metric.label_keys[idx]: label_values[idx] 
-            for idx in enumerate(label_values)}
+        properties = {metric.label_keys[idx]: label_values[idx]
+            for idx, value in enumerate(label_values, start=0)}
+        data_point = protocol.DataPoint(ns=metric.name,
+                                   name=metric.name,
+                                   value=handle.data)
         data = protocol.MetricData(
-            metrics=[handle.data],
+            metrics=[data_point],
             properties=properties
         )
         envelope.data = protocol.Data(baseData=data, baseType="MetricData")
