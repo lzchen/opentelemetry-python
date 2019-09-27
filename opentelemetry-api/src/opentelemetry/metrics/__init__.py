@@ -161,11 +161,11 @@ class Meter:
         label_keys: Sequence[str] = None,
         enabled: bool = True,
         monotonic: bool = False,
-    ) -> "Metric":
+    ) -> MetricT:
         """Creates a ``metric_kind`` metric with type ``value_type``.
 
         Args:
-            name: The name of the counter.
+            name: The name of the metric.
             description: Human-readable description of the metric.
             unit: Unit of the metric values.
             value_type: The type of values being recorded by the metric.
