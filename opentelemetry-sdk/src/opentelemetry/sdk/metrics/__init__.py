@@ -38,15 +38,13 @@ class MetricHandle:
     def _validate_update(self, value: metrics_api.ValueT):
         if not self.enabled:
             return False
-        if self.monotonic and value < 0:
-            logger.warning("Monotonic metric cannot descend.")
-            return False
         if not isinstance(value, self.value_type):
             logger.warning(
                 "Invalid value passed for %s.", self.value_type.__name__
             )
             return False
         return True
+
 
     def __repr__(self):
         return '{}(data="{}", time_stamp={})'.format(
@@ -58,10 +56,12 @@ class MetricHandle:
             type(self).__name__, self.data, self.time_stamp
         )
 
-
 class CounterHandle(metrics_api.CounterHandle, MetricHandle):
     def update(self, value: metrics_api.ValueT) -> None:
         if self._validate_update(value):
+            if self.monotonic and value < 0:
+                logger.warning("Monotonic counter cannot descend.")
+                return
             self.data += value
             self.time_stamp = datetime.utcnow()
 
@@ -73,6 +73,9 @@ class CounterHandle(metrics_api.CounterHandle, MetricHandle):
 class GaugeHandle(metrics_api.GaugeHandle, MetricHandle):
     def update(self, value: metrics_api.ValueT) -> None:
         if self._validate_update(value):
+            if self.monotonic and value < self.data:
+                logger.warning("Monotonic gauge cannot descend.")
+                return
             self.data = value
             self.time_stamp = datetime.utcnow()
 
@@ -84,7 +87,9 @@ class GaugeHandle(metrics_api.GaugeHandle, MetricHandle):
 class MeasureHandle(metrics_api.MeasureHandle, MetricHandle):
     def update(self, value: metrics_api.ValueT) -> None:
         if self._validate_update(value):
-            # TODO: record
+            if self.monotonic and value < 0:
+                logger.warning("Monotonic measure cannot accept negatives.")
+                return
             self.time_stamp = datetime.utcnow()
 
     def record(self, value: metrics_api.ValueT) -> None:
@@ -122,7 +127,7 @@ class Metric(metrics_api.Metric):
             raise ValueError("Label values must match label keys.")
         handle = self.handles.get(label_values)
         if not handle:
-            handle = self.__class__.HANDLE_TYPE(
+            handle = self.HANDLE_TYPE(
                 self.value_type, self.enabled, self.monotonic
             )
         self.handles[label_values] = handle

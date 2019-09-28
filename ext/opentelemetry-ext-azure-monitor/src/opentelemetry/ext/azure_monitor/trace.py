@@ -21,7 +21,7 @@ import requests
 from opentelemetry.ext.azure_monitor import protocol, util
 from opentelemetry.sdk.trace.export import SpanExporter, SpanExportResult
 from opentelemetry.sdk.util import ns_to_iso_str
-from opentelemetry.trace import SpanKind
+from opentelemetry.trace import Span, SpanKind
 
 logger = logging.getLogger(__name__)
 
@@ -86,7 +86,7 @@ class AzureMonitorSpanExporter(SpanExporter):
             days, hours, minutes, seconds, microseconds
         )
 
-    def span_to_envelope(self, span):
+    def span_to_envelope(self, span):  # noqa pylint: disable=too-many-branches
         envelope = protocol.Envelope(
             iKey=self.options.instrumentation_key,
             tags=dict(util.azure_monitor_context),
@@ -95,12 +95,13 @@ class AzureMonitorSpanExporter(SpanExporter):
         envelope.tags["ai.operation.id"] = "{:032x}".format(
             span.context.trace_id
         )
-        if span.parent:
+        parent = span.parent
+        if isinstance(parent, Span):
+            parent = parent.context
+        if parent:
             envelope.tags[
                 "ai.operation.parentId"
-            ] = "|{:032x}.{:016x}.".format(
-                span.context.trace_id, span.parent.span_id
-            )
+            ] = "|{:032x}.{:016x}.".format(parent.trace_id, parent.span_id)
         if span.kind in (SpanKind.CONSUMER, SpanKind.SERVER):
             envelope.name = "Microsoft.ApplicationInsights.Request"
             data = protocol.Request(
@@ -151,7 +152,22 @@ class AzureMonitorSpanExporter(SpanExporter):
                     data.resultCode = str(span.attributes["http.status_code"])
             else:  # SpanKind.INTERNAL
                 data.type = "InProc"
-        # TODO: links, tracestate, tags
         for key in span.attributes:
             data.properties[key] = span.attributes[key]
+        if span.links:
+            links = []
+            for link in span.links:
+                links.append(
+                    {
+                        "operation_Id": "{:032x}".format(
+                            link.context.trace_id
+                        ),
+                        "id": "|{:032x}.{:016x}.".format(
+                            link.context.trace_id, link.context.span_id
+                        ),
+                    }
+                )
+            data.properties["_MS.links"] = json.dumps(links)
+            print(data.properties["_MS.links"])
+        # TODO: tracestate, tags
         return envelope

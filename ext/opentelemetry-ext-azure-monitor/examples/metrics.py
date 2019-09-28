@@ -12,14 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import logging
-
 from opentelemetry import metrics
 from opentelemetry.ext.azure_monitor import AzureMonitorMetricsExporter
 from opentelemetry.sdk.metrics import Counter, Meter
 from opentelemetry.sdk.metrics.export import ConsoleMetricsExporter
-
-logging.basicConfig(level=logging.INFO)
 
 metrics.set_preferred_meter_implementation(lambda T: Meter())
 meter = metrics.meter()
