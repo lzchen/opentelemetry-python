@@ -186,9 +186,7 @@ class BatchExportSpanProcessor(SpanProcessor):
             try:
                 # Ignore type b/c the Optional[None]+slicing is too "clever"
                 # for mypy
-                self.span_exporter.export(
-                    self.spans_list[:idx]
-                )  # type: ignore
+                self.span_exporter.export(self.spans_list[:idx])  # type: ignore
             # pylint: disable=broad-except
             except Exception:
                 logger.exception("Exception while exporting Span batch.")

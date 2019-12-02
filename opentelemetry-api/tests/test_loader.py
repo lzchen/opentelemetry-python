@@ -69,9 +69,7 @@ class TestLoader(unittest.TestCase):
         self.do_test_preferred_impl(trace.set_preferred_tracer_implementation)
 
     def test_preferred_impl_with_default(self):
-        self.do_test_preferred_impl(
-            loader.set_preferred_default_implementation
-        )
+        self.do_test_preferred_impl(loader.set_preferred_default_implementation)
 
     def test_try_set_again(self):
         self.assertTrue(trace.tracer())

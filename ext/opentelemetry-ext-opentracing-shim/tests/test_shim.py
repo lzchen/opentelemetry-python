@@ -351,9 +351,7 @@ class TestShim(unittest.TestCase):
                 child_trace_id = child.unwrap().get_context().trace_id
 
                 self.assertEqual(child_trace_id, parent_trace_id)
-                self.assertEqual(
-                    child.unwrap().parent, parent.context.unwrap()
-                )
+                self.assertEqual(child.unwrap().parent, parent.context.unwrap())
 
     def test_references(self):
         """Test span creation using the `references` argument."""

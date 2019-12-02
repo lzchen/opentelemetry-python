@@ -30,9 +30,7 @@ if os.getenv("EXPORTER") == "jaeger":
     from opentelemetry.ext.jaeger import JaegerSpanExporter
 
     exporter = JaegerSpanExporter(
-        service_name="http-client",
-        agent_host_name="localhost",
-        agent_port=6831,
+        service_name="http-client", agent_host_name="localhost", agent_port=6831
     )
 else:
     exporter = ConsoleSpanExporter()

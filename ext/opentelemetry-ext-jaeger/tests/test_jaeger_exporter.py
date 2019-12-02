@@ -151,9 +151,7 @@ class TestJaegerSpanExporter(unittest.TestCase):
 
         link_attributes = {"key_bool": True}
 
-        link = trace_api.Link(
-            context=other_context, attributes=link_attributes
-        )
+        link = trace_api.Link(context=other_context, attributes=link_attributes)
 
         otel_spans = [
             trace.Span(
@@ -163,9 +161,7 @@ class TestJaegerSpanExporter(unittest.TestCase):
                 events=(event,),
                 links=(link,),
             ),
-            trace.Span(
-                name=span_names[1], context=parent_context, parent=None
-            ),
+            trace.Span(name=span_names[1], context=parent_context, parent=None),
             trace.Span(name=span_names[2], context=other_context, parent=None),
         ]
 

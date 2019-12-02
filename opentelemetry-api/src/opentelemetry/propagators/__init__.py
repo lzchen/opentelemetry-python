@@ -45,9 +45,7 @@ def extract(
 
 
 def inject(
-    tracer: trace.Tracer,
-    set_in_carrier: httptextformat.Setter[_T],
-    carrier: _T,
+    tracer: trace.Tracer, set_in_carrier: httptextformat.Setter[_T], carrier: _T
 ) -> None:
     """Inject values from the current context into the carrier.
 

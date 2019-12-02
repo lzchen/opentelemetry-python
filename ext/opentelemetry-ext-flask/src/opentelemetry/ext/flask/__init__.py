@@ -90,6 +90,4 @@ def _teardown_flask_request(exc):
     if exc is None:
         activation.__exit__(None, None, None)
     else:
-        activation.__exit__(
-            type(exc), exc, getattr(exc, "__traceback__", None)
-        )
+        activation.__exit__(type(exc), exc, getattr(exc, "__traceback__", None))

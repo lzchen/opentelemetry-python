@@ -137,12 +137,7 @@ class TestBoundedList(unittest.TestCase):
 
 class TestBoundedDict(unittest.TestCase):
     base = collections.OrderedDict(
-        [
-            ("name", "Firulais"),
-            ("age", 7),
-            ("weight", 13),
-            ("vaccinated", True),
-        ]
+        [("name", "Firulais"), ("age", 7), ("weight", 13), ("vaccinated", True)]
     )
 
     def test_negative_maxlen(self):

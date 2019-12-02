@@ -71,9 +71,7 @@ class HTTPTextFormat(abc.ABC):
     """
 
     @abc.abstractmethod
-    def extract(
-        self, get_from_carrier: Getter[_T], carrier: _T
-    ) -> SpanContext:
+    def extract(self, get_from_carrier: Getter[_T], carrier: _T) -> SpanContext:
         """Create a SpanContext from values in the carrier.
 
         The extract function should retrieve values from the carrier

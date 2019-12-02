@@ -78,9 +78,7 @@ class B3Format(HTTPTextFormat):
                 or sampled
             )
             flags = (
-                _extract_first_element(
-                    get_from_carrier(carrier, cls.FLAGS_KEY)
-                )
+                _extract_first_element(get_from_carrier(carrier, cls.FLAGS_KEY))
                 or flags
             )
 

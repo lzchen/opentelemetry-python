@@ -165,9 +165,7 @@ class TestSpanCreation(unittest.TestCase):
                 root_context = root.get_context()
                 child_context = child.get_context()
                 self.assertEqual(root_context.trace_id, child_context.trace_id)
-                self.assertNotEqual(
-                    root_context.span_id, child_context.span_id
-                )
+                self.assertNotEqual(root_context.span_id, child_context.span_id)
                 self.assertEqual(
                     root_context.trace_state, child_context.trace_state
                 )
@@ -214,9 +212,7 @@ class TestSpanCreation(unittest.TestCase):
                 # parent, not the current span.
                 child_context = child.get_context()
                 self.assertEqual(other_parent.trace_id, child_context.trace_id)
-                self.assertNotEqual(
-                    other_parent.span_id, child_context.span_id
-                )
+                self.assertNotEqual(other_parent.span_id, child_context.span_id)
                 self.assertEqual(
                     other_parent.trace_state, child_context.trace_state
                 )
@@ -399,16 +395,13 @@ class TestSpan(unittest.TestCase):
 
     def test_links(self):
         other_context1 = trace_api.SpanContext(
-            trace_id=trace.generate_trace_id(),
-            span_id=trace.generate_span_id(),
+            trace_id=trace.generate_trace_id(), span_id=trace.generate_span_id()
         )
         other_context2 = trace_api.SpanContext(
-            trace_id=trace.generate_trace_id(),
-            span_id=trace.generate_span_id(),
+            trace_id=trace.generate_trace_id(), span_id=trace.generate_span_id()
         )
         other_context3 = trace_api.SpanContext(
-            trace_id=trace.generate_trace_id(),
-            span_id=trace.generate_span_id(),
+            trace_id=trace.generate_trace_id(), span_id=trace.generate_span_id()
         )
         links = [
             trace_api.Link(other_context1),
