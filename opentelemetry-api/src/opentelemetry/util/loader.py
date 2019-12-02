@@ -174,4 +174,4 @@ def set_preferred_default_implementation(
     """Sets a factory function that may be called for any implementation
     object. See the :ref:`module docs <loader-factory>` for more details."""
     global _DEFAULT_FACTORY  # pylint:disable=global-statement
-    _DEFAULT_FACTORY = implementation_factory
+    _DEFAULT_FACTORY = implementation_factory # type: ignore
