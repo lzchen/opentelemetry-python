@@ -21,11 +21,7 @@ from opentelemetry.sdk.metrics import Counter, Meter
 
 metrics.set_preferred_meter_implementation(lambda _: Meter())
 meter = metrics.meter()
-counter = meter.create_metric(
-    "available memory",
-    "available memory",
-    "bytes",
-    int,
+counter = meter.create_metric("available memory", "available memory", "bytes", int,
     Counter,
     ("environment",),
 )
