@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655147273695,
+  "lastUpdate": 1655147279151,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -638,6 +638,46 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000045389765627223145",
             "extra": "mean: 1.525036886924365 usec\nrounds: 104167"
+          }
+        ]
+      }
+    ],
+    "OpenTelemetry Python Benchmarks - Python pypy-3.7 - sdk": [
+      {
+        "commit": {
+          "author": {
+            "email": "srikanth.chekuri92@gmail.com",
+            "name": "Srikanth Chekuri",
+            "username": "srikanthccv"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e073d4dafaad42506c08d70727a8c9d47663ca23",
+          "message": "Add support for OTLP/HTTP log exporter (#2462)",
+          "timestamp": "2022-06-13T19:42:23+05:30",
+          "tree_id": "9d8330bf5642f1ea78ec330c9baf42dd5c41f759",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/e073d4dafaad42506c08d70727a8c9d47663ca23"
+        },
+        "date": 1655147278427,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 264990.5092830398,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000044761917035001464",
+            "extra": "mean: 3.7737200577696433 usec\nrounds: 188680"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 166468.0910003218,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00005328075020063794",
+            "extra": "mean: 6.00715725152436 usec\nrounds: 131579"
           }
         ]
       }
