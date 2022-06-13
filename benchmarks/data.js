@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655147884342,
+  "lastUpdate": 1655147928008,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -1052,6 +1052,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0006624013705828547",
             "extra": "mean: 118.55427500556203 usec\nrounds: 9018"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "srikanth.chekuri92@gmail.com",
+            "name": "Srikanth Chekuri",
+            "username": "srikanthccv"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "e073d4dafaad42506c08d70727a8c9d47663ca23",
+          "message": "Add support for OTLP/HTTP log exporter (#2462)",
+          "timestamp": "2022-06-13T19:42:23+05:30",
+          "tree_id": "9d8330bf5642f1ea78ec330c9baf42dd5c41f759",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/e073d4dafaad42506c08d70727a8c9d47663ca23"
+        },
+        "date": 1655147926259,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_simple_span_processor",
+            "value": 3988.6543338029187,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000004064185691305031",
+            "extra": "mean: 250.7111211731817 usec\nrounds: 1535"
+          },
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_batch_span_processor",
+            "value": 7906.283033177655,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0005932076021454614",
+            "extra": "mean: 126.48168498441483 usec\nrounds: 7752"
           }
         ]
       }
