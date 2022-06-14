@@ -1,5 +1,7 @@
 # Contributing to opentelemetry-python
 
+
+
 The Python special interest group (SIG) meets regularly. See the OpenTelemetry
 [community](https://github.com/open-telemetry/community#python-sdk) repo for
 information on this and other language SIGs.
