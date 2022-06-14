@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655234604470,
+  "lastUpdate": 1655234609255,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -3326,6 +3326,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000012244504370559207",
             "extra": "mean: 48.8218042697333 usec\nrounds: 6979"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "distinct": true,
+          "id": "aba6b7241b45f8aa394af48ac972eff69b84f8ef",
+          "message": "Update prepare-release-branch.yml",
+          "timestamp": "2022-06-14T12:15:58-07:00",
+          "tree_id": "a5081d006cdb03aa8d63478e0192cfb1d4b0d935",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/aba6b7241b45f8aa394af48ac972eff69b84f8ef"
+        },
+        "date": 1655234608535,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 28160.62011848801,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000011974691590964322",
+            "extra": "mean: 35.51058164885652 usec\nrounds: 5046"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 20442.902658326733,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000013951550921859836",
+            "extra": "mean: 48.91673245788721 usec\nrounds: 7083"
           }
         ]
       }
