@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655234486929,
+  "lastUpdate": 1655234512633,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -2408,6 +2408,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0007317419217196842",
             "extra": "mean: 123.0740210907696 usec\nrounds: 8013"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "distinct": true,
+          "id": "aba6b7241b45f8aa394af48ac972eff69b84f8ef",
+          "message": "Update prepare-release-branch.yml",
+          "timestamp": "2022-06-14T12:15:58-07:00",
+          "tree_id": "a5081d006cdb03aa8d63478e0192cfb1d4b0d935",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/aba6b7241b45f8aa394af48ac972eff69b84f8ef"
+        },
+        "date": 1655234511305,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_simple_span_processor",
+            "value": 2713.678478360059,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00008227687092312031",
+            "extra": "mean: 368.5034936800339 usec\nrounds: 1345"
+          },
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_batch_span_processor",
+            "value": 6021.102905654681,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007577682830164454",
+            "extra": "mean: 166.08252934206726 usec\nrounds: 7617"
           }
         ]
       }
