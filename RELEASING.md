@@ -9,6 +9,8 @@
 
 ## Preparing a new patch release
 
+
+
 * Backport pull request(s) to the release branch.
   * Run the [Backport workflow](https://github.com/open-telemetry/opentelemetry-python/actions/workflows/backport.yml).
   * Press the "Run workflow" button, then select the release branch from the dropdown list,
