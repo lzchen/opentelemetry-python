@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655331973655,
+  "lastUpdate": 1655331976230,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -5874,6 +5874,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 2.1393758227798127e-7",
             "extra": "mean: 4.264726774744565 usec\nrounds: 75758"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "distinct": true,
+          "id": "15d7c63b1c8b92c7315d8012ec51ac53aff63875",
+          "message": "Update CHANGELOG.md",
+          "timestamp": "2022-06-15T15:18:27-07:00",
+          "tree_id": "197c8c72b4061846d0b476382ff17b6140548e13",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/15d7c63b1c8b92c7315d8012ec51ac53aff63875"
+        },
+        "date": 1655331975298,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 110806.06533189252,
+            "unit": "iter/sec",
+            "range": "stddev: 7.851667873670019e-7",
+            "extra": "mean: 9.024776730450126 usec\nrounds: 13262"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 201877.84334126685,
+            "unit": "iter/sec",
+            "range": "stddev: 8.775144438463601e-7",
+            "extra": "mean: 4.953490603273078 usec\nrounds: 63691"
           }
         ]
       }
