@@ -38,9 +38,9 @@
   to be created based on the full version name
   (e.g. `release/v1.12.0rc1-0.31b0` instead of a "long-term" release branch name like `release/v1.9.x-0.31bx`).
 * Patch releases are not supported on short-term release branches.
-* The version in `main` in this case will be bumped to the release version (e.g. `1.12.0-dev/0.32b0-dev`).
+* The version in `main` in this case will be bumped to the release version (e.g. `1.12.0-dev/0.33b0-dev`).
 * To make a second pre-release version, manually update the version in `main`
-  (e.g. update it from `1.12.0-dev` to `1.12.0rc2-dev`)
+  (e.g. update it from `1.12.0-dev` to `1.13.0-dev`)
   before running the prepare release branch workflow for that release.
 * Note that pre-releases are not needed for unstable artifacts.
 
