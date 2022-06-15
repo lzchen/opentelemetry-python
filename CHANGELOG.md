@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## Version 1.13.0/0.33b0 (2022-06-15)
+
 - Add min/max fields to Histogram
   ([#2759](https://github.com/open-telemetry/opentelemetry-python/pull/2759))
 - `opentelemetry-exporter-otlp-proto-http` Add support for OTLP/HTTP log exporter
