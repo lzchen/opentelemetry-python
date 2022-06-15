@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655331644690,
+  "lastUpdate": 1655331672600,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -2440,6 +2440,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0008931828384756346",
             "extra": "mean: 214.46430075774032 usec\nrounds: 6068"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "distinct": true,
+          "id": "15d7c63b1c8b92c7315d8012ec51ac53aff63875",
+          "message": "Update CHANGELOG.md",
+          "timestamp": "2022-06-15T15:18:27-07:00",
+          "tree_id": "197c8c72b4061846d0b476382ff17b6140548e13",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/15d7c63b1c8b92c7315d8012ec51ac53aff63875"
+        },
+        "date": 1655331670908,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_simple_span_processor",
+            "value": 3481.520970449963,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000050150700252556825",
+            "extra": "mean: 287.2307846161722 usec\nrounds: 1560"
+          },
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_batch_span_processor",
+            "value": 5804.528079304535,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007745165642491869",
+            "extra": "mean: 172.2792940851471 usec\nrounds: 7321"
           }
         ]
       }
