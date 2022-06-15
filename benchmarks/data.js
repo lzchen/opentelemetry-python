@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655336823619,
+  "lastUpdate": 1655336839164,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -6252,6 +6252,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000003279619077851662",
             "extra": "mean: 42.091240341012785 usec\nrounds: 7273"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5751ba56cd4bb40a4772ea1f0049d88e6172ca3e",
+          "message": "Merge pull request #19 from lzchen/update-version-to-1.14.0-dev-0.34b0-dev\n\nUpdate version to 1.14.0-dev/0.34b0-dev",
+          "timestamp": "2022-06-15T16:30:47-07:00",
+          "tree_id": "e31f7f22f6eacef8572714dd8d9811cbb74bd65d",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/5751ba56cd4bb40a4772ea1f0049d88e6172ca3e"
+        },
+        "date": 1655336838365,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 28258.31417101993,
+            "unit": "iter/sec",
+            "range": "stddev: 9.90262486106142e-7",
+            "extra": "mean: 35.387815208932075 usec\nrounds: 5168"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 20428.66589309093,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000013006671535649393",
+            "extra": "mean: 48.95082259572343 usec\nrounds: 7497"
           }
         ]
       }
