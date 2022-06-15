@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655332967184,
+  "lastUpdate": 1655332983712,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -494,6 +494,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.00003740252445920367",
             "extra": "mean: 66.83124469745964 usec\nrounds: 8251"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "distinct": true,
+          "id": "5f2693fc378058a0b788f4a1b92127044d99d27f",
+          "message": "Merge branch 'release-workflow' of https://github.com/lzchen/opentelemetry-python",
+          "timestamp": "2022-06-15T15:25:59-07:00",
+          "tree_id": "3c36e9005485f182c52973dc2785a4432e5b13f2",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/5f2693fc378058a0b788f4a1b92127044d99d27f"
+        },
+        "date": 1655332982856,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 31216.80925443918,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000001376071829473983",
+            "extra": "mean: 32.03402345990231 usec\nrounds: 6266"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 22048.14499507259,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000011364480193841058",
+            "extra": "mean: 45.35528953676076 usec\nrounds: 8334"
           }
         ]
       }
