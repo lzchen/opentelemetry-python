@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Version 1.13.0/0.33b0 (2022-06-14)
+## Unreleased
 
 - Add min/max fields to Histogram
   ([#2759](https://github.com/open-telemetry/opentelemetry-python/pull/2759))
@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add missing `to_json` methods
   ([#2722](https://github.com/open-telemetry/opentelemetry-python/pull/2722)
 - Fix type hints for textmap `Getter` and `Setter`
+
+## Version 1.13.0/0.33b0 (2022-06-14)
+
   ([#2657](https://github.com/open-telemetry/opentelemetry-python/pull/2657))
 - Fix LogEmitterProvider.force_flush hanging randomly
   ([#2714](https://github.com/open-telemetry/opentelemetry-python/pull/2714))
