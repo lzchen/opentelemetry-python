@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655331993971,
+  "lastUpdate": 1655332078133,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -7362,6 +7362,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0006169406825302775",
             "extra": "mean: 126.37052245977523 usec\nrounds: 8749"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "distinct": true,
+          "id": "15d7c63b1c8b92c7315d8012ec51ac53aff63875",
+          "message": "Update CHANGELOG.md",
+          "timestamp": "2022-06-15T15:18:27-07:00",
+          "tree_id": "197c8c72b4061846d0b476382ff17b6140548e13",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/15d7c63b1c8b92c7315d8012ec51ac53aff63875"
+        },
+        "date": 1655332077243,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_simple_span_processor",
+            "value": 3243.4810852447536,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000015179589825709754",
+            "extra": "mean: 308.31072348446884 usec\nrounds: 1320"
+          },
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_batch_span_processor",
+            "value": 6792.929817559241,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007030567106018086",
+            "extra": "mean: 147.21188454134636 usec\nrounds: 7284"
           }
         ]
       }
