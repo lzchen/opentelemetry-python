@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Update .isort.cfg
+  ([#23](https://github.com/lzchen/opentelemetry-python/pull/23))
+  
 ## Version 1.13.0/0.33b0 (2022-06-15)
 
 - Add min/max fields to Histogram
