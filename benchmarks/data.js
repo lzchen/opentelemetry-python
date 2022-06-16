@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655338250553,
+  "lastUpdate": 1655338335748,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -7814,6 +7814,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.000817684332264078",
             "extra": "mean: 212.61457862986603 usec\nrounds: 6486"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b65f18cdd1d5bfb12ab0f90f22a344186314ccec",
+          "message": "Merge pull request #21 from lzchen/copy-change-log-updates-from-release-v1.13.x-0.33bx\n\nCopy change log updates from release/v1.13.x-0.33bx",
+          "timestamp": "2022-06-15T16:56:17-07:00",
+          "tree_id": "9f6be0332bbb7f7a3771135a749f1389dde56879",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/b65f18cdd1d5bfb12ab0f90f22a344186314ccec"
+        },
+        "date": 1655338334905,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_simple_span_processor",
+            "value": 3171.4135145246028,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000006630518039435528",
+            "extra": "mean: 315.3168123362496 usec\nrounds: 1524"
+          },
+          {
+            "name": "exporter/opentelemetry-exporter-otlp-proto-grpc/tests/performance/benchmarks/test_benchmark_trace_exporter.py::test_batch_span_processor",
+            "value": 5585.542857864863,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007790309004699261",
+            "extra": "mean: 179.033627607373 usec\nrounds: 7143"
           }
         ]
       }
