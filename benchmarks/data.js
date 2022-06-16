@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655417380203,
+  "lastUpdate": 1655417389519,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -6134,6 +6134,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 2.1737851543661e-7",
             "extra": "mean: 4.058920125550434 usec\nrounds: 70423"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "97382d9e4451630a713d03ab1d41d4e95a03298d",
+          "message": "Update .isort.cfg (#23)",
+          "timestamp": "2022-06-16T14:39:35-07:00",
+          "tree_id": "b648650cbca40ce0955a8f936d757ed85283951b",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/97382d9e4451630a713d03ab1d41d4e95a03298d"
+        },
+        "date": 1655417388265,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 115604.84859059393,
+            "unit": "iter/sec",
+            "range": "stddev: 3.9900080917903215e-7",
+            "extra": "mean: 8.650156219151556 usec\nrounds: 16208"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 243767.13053041828,
+            "unit": "iter/sec",
+            "range": "stddev: 2.4625278813326573e-7",
+            "extra": "mean: 4.102275798316525 usec\nrounds: 74627"
           }
         ]
       }
