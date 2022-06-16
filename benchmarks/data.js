@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655340456811,
+  "lastUpdate": 1655340533227,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -10290,6 +10290,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000015560205392151687",
             "extra": "mean: 859.6819903974343 nsec\nrounds: 123473"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "90e8ba630cfd085cd08cf5cb156b33b8481cb266",
+          "message": "Merge pull request #22 from lzchen/lzchen-patch-1\n\ntest",
+          "timestamp": "2022-06-15T16:56:56-07:00",
+          "tree_id": "25b7e4c3915f7d350c5fe72faf362e957f0e262f",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/90e8ba630cfd085cd08cf5cb156b33b8481cb266"
+        },
+        "date": 1655340532376,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 577907.8367960961,
+            "unit": "iter/sec",
+            "range": "stddev: 2.555731077181171e-7",
+            "extra": "mean: 1.7303797185793182 usec\nrounds: 69931"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 1009419.3830950409,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000019678753706258333",
+            "extra": "mean: 990.6685137489536 nsec\nrounds: 111112"
           }
         ]
       }
