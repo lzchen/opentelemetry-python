@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1655340646674,
+  "lastUpdate": 1655417095093,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -1294,6 +1294,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 8.526948433619056e-7",
             "extra": "mean: 4.618390408815072 usec\nrounds: 65790"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "97382d9e4451630a713d03ab1d41d4e95a03298d",
+          "message": "Update .isort.cfg (#23)",
+          "timestamp": "2022-06-16T14:39:35-07:00",
+          "tree_id": "b648650cbca40ce0955a8f936d757ed85283951b",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/97382d9e4451630a713d03ab1d41d4e95a03298d"
+        },
+        "date": 1655417094046,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 114756.03011846499,
+            "unit": "iter/sec",
+            "range": "stddev: 8.654853428136961e-7",
+            "extra": "mean: 8.714139021432509 usec\nrounds: 14451"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 212743.56369132717,
+            "unit": "iter/sec",
+            "range": "stddev: 4.274948376347275e-7",
+            "extra": "mean: 4.70049473012925 usec\nrounds: 66226"
           }
         ]
       }
