@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1660155391619,
+  "lastUpdate": 1660155478782,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -11392,6 +11392,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000034258529714217583",
             "extra": "mean: 975.5569710126089 nsec\nrounds: 147059"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ed5036b9fe3f9866a6bd4df5c61744aee76d501b",
+          "message": "Update codeql-analysis.yml",
+          "timestamp": "2022-08-10T11:08:22-07:00",
+          "tree_id": "6ff37aed67e0a35a546362ba26bfba8d8b3be877",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/ed5036b9fe3f9866a6bd4df5c61744aee76d501b"
+        },
+        "date": 1660155477413,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 642980.2889305179,
+            "unit": "iter/sec",
+            "range": "stddev: 1.6635714006194947e-7",
+            "extra": "mean: 1.5552576295352032 usec\nrounds: 67573"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 1162515.0732584628,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000015504157074101578",
+            "extra": "mean: 860.2039001498717 nsec\nrounds: 123457"
           }
         ]
       }
