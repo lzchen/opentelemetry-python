@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1660155346078,
+  "lastUpdate": 1660155391619,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -7886,6 +7886,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000012398812346160702",
             "extra": "mean: 49.56561886052847 usec\nrounds: 8144"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ed5036b9fe3f9866a6bd4df5c61744aee76d501b",
+          "message": "Update codeql-analysis.yml",
+          "timestamp": "2022-08-10T11:08:22-07:00",
+          "tree_id": "6ff37aed67e0a35a546362ba26bfba8d8b3be877",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/ed5036b9fe3f9866a6bd4df5c61744aee76d501b"
+        },
+        "date": 1660155388437,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_span",
+            "value": 25117.906137710288,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000017713892547568998",
+            "extra": "mean: 39.81223572209584 usec\nrounds: 4535"
+          },
+          {
+            "name": "opentelemetry-sdk/tests/performance/benchmarks/trace/test_benchmark_trace.py::test_simple_start_as_current_span",
+            "value": 17764.45162210852,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0000021245224997560245",
+            "extra": "mean: 56.292196419700495 usec\nrounds: 5977"
           }
         ]
       }
