@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1660155085163,
+  "lastUpdate": 1660155162299,
   "repoUrl": "https://github.com/lzchen/opentelemetry-python",
   "entries": {
     "OpenTelemetry Python Benchmarks - Python 3.10 - sdk": [
@@ -4952,6 +4952,44 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0000010432567664209261",
             "extra": "mean: 5.674201903932855 usec\nrounds: 61346"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "lechen@microsoft.com",
+            "name": "Leighton Chen",
+            "username": "lzchen"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ed5036b9fe3f9866a6bd4df5c61744aee76d501b",
+          "message": "Update codeql-analysis.yml",
+          "timestamp": "2022-08-10T11:08:22-07:00",
+          "tree_id": "6ff37aed67e0a35a546362ba26bfba8d8b3be877",
+          "url": "https://github.com/lzchen/opentelemetry-python/commit/ed5036b9fe3f9866a6bd4df5c61744aee76d501b"
+        },
+        "date": 1660155160962,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_extract_single_header",
+            "value": 94809.45792427569,
+            "unit": "iter/sec",
+            "range": "stddev: 6.223768981633456e-7",
+            "extra": "mean: 10.547470915809896 usec\nrounds: 12034"
+          },
+          {
+            "name": "propagator/opentelemetry-propagator-b3/tests/performance/benchmarks/trace/propagation/test_benchmark_b3_format.py::test_inject_empty_context",
+            "value": 196277.28106296487,
+            "unit": "iter/sec",
+            "range": "stddev: 3.0450339383394706e-7",
+            "extra": "mean: 5.094833159417999 usec\nrounds: 61346"
           }
         ]
       }
